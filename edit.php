@@ -1,5 +1,5 @@
 <h1>EDIT</h1>
-<form methhod="post">
+<form methhod="post"> 
 <input type="submit" value="<-Back" name="back"/><br />
 input a new product name:<br />
 <input name="new" type="text" /><br />

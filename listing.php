@@ -1,6 +1,6 @@
 <h1>LISTING</h1>
 <form methhod="post">
-<input type="submit" value="<-exit" name="back"/><br />
+ <input type="submit" value="<-exit" name="back"/><br />
 <input type="submit" value="edit" name="edit"/>
 <input type="submit" value="delete" name="delete"/>
 </form>

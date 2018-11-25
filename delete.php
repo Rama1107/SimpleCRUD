@@ -1,5 +1,5 @@
 <form methhod="post">
-    <br />
+     <br />
 <input type="submit" value="<-Back" name="back"/><br />
 Input product name to delete:<br />
 <input name="del1" type="text" /><br />

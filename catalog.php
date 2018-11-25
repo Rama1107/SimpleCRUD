@@ -1,6 +1,6 @@
 CATALOG
 <form methhod="post">
-    <br />
+     <br />
 <input type="submit" value="<-Back" name="back"/><br />
 <form/>
 <?php

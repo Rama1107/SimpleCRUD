@@ -1,0 +1,64 @@
+#include "stdafx.h"
+#include <stdlib.h>
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+
+using namespace std;
+
+double f(double x){
+	return(atan(x));
+}
+
+int main()
+{
+	double *fi, *xi, *x, a, b, h1, h2;
+	double L = 0, p = 1;
+	int N1, N2;
+
+	cin >> a;
+	cin >> b;
+	cin >> N1;
+	cin >> N2;
+
+
+	h1 = (b - a) / (N1 - 1);
+	h2 = (b - a) / (N2 - 1);
+	x = new double[N2];
+	xi = new double[N1];
+	fi = new double[N1];
+	for (int i = 0; i<N1; i++)
+		xi[i] = a + i*h1;
+	for (int i = 0; i<N1; i++)
+		fi[i] = f(xi[i]);
+
+	for (int i = 0; i<N2; i++)
+		x[i] = a + i*h2;
+
+	cout << "x\t\tf(x)\t\tL\t\tL-f(x)\n\n";
+	for (int k = 0; k<N2; k++)
+	{
+		printf("%8.5f\t", x[k]);//cout<<x[k]<<"\t";
+		printf("%8.5f\t", f(x[k]));//cout<<f(x[k])<<"\t";
+		L = 0;
+
+		for (int i = 0; i<N1; i++)
+		{
+			p = 1;
+			for (int j = 0; j<N1; j++)
+			{
+				if (i != j)
+					p *= (x[k] - xi[j]) / (xi[i] - xi[j]);
+			}//for J
+
+			L += fi[i] * p;
+
+		}//for I
+
+		printf("%8.5f\t", L);//cout<<L<<"\t";
+		printf("%8.8f\n\n", abs(f(x[k]) - L));//cout<<abs(f(x[k])-L)<<"\n\n";
+	}//for K
+
+
+	system("pause");
+}

@@ -1,0 +1,109 @@
+import math
+import sys
+mass1=[]
+n=40
+for item in range(n):
+   mass1.append(0)
+item = 0
+
+#factorial
+def factorial(a):
+    if a<=1: return 1
+    else: return a*factorial(a-1)
+
+def schet(mass,  n1,n2,): #массив, n - область подсчета, d - длина массива -2
+    it = n1
+    dd=0
+
+    #тригонометрия
+    for item in range(n1,n2-dd,1): ############ cosinus
+        if mass[it] == 'cos':
+            res2 = math.cos(float(mass[it + 1]));
+            mass[it] = res2;
+            for item1 in range(it, n-2, 1): mass[item1+1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        elif mass[it] == 'sin':################# sinus
+            res2 = math.sin(float(mass[it + 1]));
+            mass[it] = res2;
+            for item1 in range(it, n-2, 1): mass[item1+1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        elif mass[it] == 'tan':############### tangens
+            res2 = math.tan(float(mass[it + 1]));
+            mass[it] = res2;
+            for item1 in range(it, n-2, 1): mass[item1+1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        elif mass[it+1] == '!':################ factorial
+            res2 = factorial(float(mass[it]));
+            mass[it] = res2;
+            for item1 in range(it, n-2, 1): mass[item1+1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        it += 1
+    it = n1
+
+    # ctepen
+    for item in range(n1,n2-dd,1):  
+        if mass[it] == '^':
+            res2 = float(mass[it - 1]) ** float(mass[it + 1]);
+            mass[it - 1] = res2;
+            for item1 in range(it, n-2, 1): mass[item1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        it += 1
+    it = n1
+
+    # ymnozjenie i delenie
+    for item in range(n1,n2-dd,1):  
+        if mass[it] == '*':
+            res1 = float(mass[it - 1]) * float(mass[it + 1]);
+            mass[it - 1] = res1;
+            for item1 in range(it, n-2, 1): mass[item1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        elif mass[it] == '/':
+            res2 = float(mass[it - 1]) / float(mass[it + 1]);
+            mass[it - 1] = res2;
+            for item1 in range(it, n-2, 1): mass[item1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        it += 1
+    it = n1
+
+    #slozjenie i vichitanie
+    for item in range(n1,n2-dd,1):  
+        if mass[it] == '+':
+            res1 = float(mass[it - 1]) + float(mass[it + 1]);
+            mass[it - 1] = res1;
+            for item1 in range(it, n-2, 1): mass[item1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        elif mass[it] == '-':
+            res2 = float(mass[it - 1]) - float(mass[it + 1]);
+            mass[it - 1] = res2;
+            for item1 in range(it, n-2, 1): mass[item1] = mass[item1 + 2]
+            it -= 1;dd+=2
+        it += 1
+
+
+def scobki(mass, tt):
+    for item in range(n):
+        if mass1[item] == '(': tt = 1; break
+    if tt == 1:
+        for item in range(n):
+            if mass[item] == '(':
+                m1 = item;
+            elif mass[item] == ')':
+                m2 = item; break
+        schet(mass, m1, m2)
+        mass[m1] = mass[m1 + 1]
+        for it in range(m1 + 1, n - 2, 1): mass[it] = mass[it + 2]
+        scobki(mass,0)
+
+while True:
+    mass1[item] = input(' ')
+    print('%d) ' % (item + 1), end='')
+    for item2 in range(item + 1):
+        print(mass1[item2], end=' ')
+    if mass1[item] == '=':
+       scobki(mass1,0)
+       schet(mass1, 0,n)
+       for item in range(1):
+           print(mass1[item], end='')
+       break
+    item += 1
+
